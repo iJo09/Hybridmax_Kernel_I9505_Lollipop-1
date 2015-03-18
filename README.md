@@ -24,6 +24,8 @@ HOW TO BUILD KERNEL
 	- type following command
 	$ tar cvf GT-I9505_EUR_LL.tar zImage
 #################################################################################
+
+
 LINUX README
 
 	Linux kernel release 3.x <http://kernel.org/>
