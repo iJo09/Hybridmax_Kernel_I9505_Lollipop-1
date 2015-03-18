@@ -23,7 +23,7 @@ HOW TO BUILD KERNEL
 	- change current directory to Kernel/arch/arm/boot
 	- type following command
 	$ tar cvf GT-I9505_EUR_LL.tar zImage
-#################################################################################
+
 
 
 LINUX README
