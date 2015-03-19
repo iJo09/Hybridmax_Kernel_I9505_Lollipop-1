@@ -1,0 +1,63 @@
+#!/system/bin/sh
+
+mount () {
+mount -o remount,rw /system
+mount -t rootfs -o remount,rw rootfs
+}
+
+unmount () {
+mount -t rootfs -o remount,ro rootfs
+mount -o remount,ro /system
+}
+
+perm () {
+chmod 644 $BP;
+chmod 644 $BPB;
+}
+
+backup () {
+BP="/system/build.prop"
+BPB="/system/build.prop.bak"
+if [ -f /system/build.prop.bak ]; 
+  then
+    rm -rf $BP
+    cp $BP.bak $BP
+  else
+    cp $BP $BP.bak
+fi;
+}
+
+mod () {
+if grep -q "ro.config.knox=1" $BP; then
+	sed -i "s/"ro.config.knox=1"/"ro.config.knox=0"/g" $BP
+fi;
+if grep -q "ro.config.tima=1" $BP; then
+	sed -i "s/"ro.config.tima=1"/"ro.config.tima=0"/g" $BP
+fi;
+if grep -q "ro.build.selinux=1" $BP; then
+	sed -i "s/"ro.build.selinux=1"/"ro.build.selinux=0"/g" $BP
+fi;
+if grep -q "ro.security.mdpp.ux=Enabled" $BP; then
+	sed -i "s/"ro.security.mdpp.ux=Enabled"/"ro.security.mdpp.ux=Disabled"/g" $BP
+fi;
+if ! grep -q "wifi.supplicant_scan_interval=180" $BP; then
+	echo "wifi.supplicant_scan_interval=180" >> $BP
+fi;
+if grep -q "security.mdpp=None" $BP; then
+	sed -i "s/"security.mdpp=None"/"#security.mdpp=None"/g" $BP
+fi;
+if grep -q "ro.securestorage.support=true" $BP; then
+	sed -i "s/"ro.securestorage.support=true"/"ro.securestorage.support=false"/g" $BP
+fi;
+
+setprop pm.sleep_mode 1;
+setprop ro.ril.disable.power.collapse 0;
+setprop ro.telephony.call_ring.delay 1000;
+}
+
+#Set some build props mods
+mount
+backup
+mod
+perm
+unmount

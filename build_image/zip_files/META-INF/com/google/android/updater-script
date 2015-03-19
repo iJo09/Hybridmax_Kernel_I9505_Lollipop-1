@@ -1,0 +1,154 @@
+ui_print("*************************");
+ui_print("Hybridmax-Kernel-Lollipop");
+ui_print("Device: GalaxyS4 [I9505] ");
+ui_print("*************************");
+ui_print("");
+ui_print("Mounting Partitions");
+ui_print("");
+mount("ext4", "EMMC", "/dev/block/mmcblk0p16", "/system");
+mount("ext4", "EMMC", "/dev/block/mmcblk0p18", "/cache");
+mount("ext4", "EMMC", "/dev/block/mmcblk0p29", "/data");
+mount("ext4", "EMMC", "/dev/block/mmcblk1p1", "/sdcard");
+ui_print("Cleaning old Files");
+ui_print("");
+
+# Adam Kernel
+delete_recursive("/data/.adamkernel");
+
+# AEL Kernel
+delete_recursive("/data/.ael");
+
+# Alucard kernel
+delete_recursive("/alucard_plug");
+delete_recursive("/data/.alucard");
+delete_recursive("/system/wget");
+
+# Ausdim Kernel
+delete_recursive("/data/.ausdim-kernel");
+delete_recursive("/sdcard/ausdim-kernel-data");
+delete_recursive("/mnt/sdcard/ausdim-kernel-data");
+delete_recursive("/storage/sdcard0/ausdim-kernel-data");
+delete_recursive("/data/media/0/ausdim-kernel-data");
+
+# Ghost Kernel
+delete_recursive("/data/.ghost");
+
+# Googy Max 3 kernel
+delete_recursive("/data/.googymax3");
+
+# Hybridmax Kernel
+delete_recursive("/data/.hybridmax");
+delete_recursive("/sdcard/hybridmax-kernel-data");
+delete_recursive("/mnt/sdcard/hybridmax-kernel-data");
+delete_recursive("/storage/sdcard0/hybridmax-kernel-data");
+delete_recursive("/data/media/0/hybridmax-kernel-data");
+
+# Imperium kernel
+delete_recursive("/data/.imperium");
+
+# KT Kernel
+delete_recursive("/sdcard/KTweaker");
+delete_recursive("/system/app/com.ktoonsez.KTweaker.apk");
+delete_recursive("/system/app/com.ktoonsez.KTmonitor.apk");
+delete("/data/dalvik-cache/system@app@com.ktoonsez.KTweaker.apk@classes.dex");
+delete("/data/dalvik-cache/system@app@com.ktoonsez.KTmonitor.apk@classes.dex");
+delete_recursive("/data/data/com.ktoonsez.KTmonitor");
+delete_recursive("/data/data/com.ktoonsez.KTweaker");
+
+# STweaks
+delete_recursive("/data/app/com.gokhanmoral.stweaks.app-1.apk");
+delete_recursive("/system/app/STweaks.apk");
+delete_recursive("/system/app/STweaks_Googy-Max.apk");
+delete_recursive("/system/app/GTweaks.apk");
+delete_recursive("/system/app/HybridTweaks.apk");
+delete("/data/dalvik-cache/system@app@STweaks.apk@classes.dex");
+delete("/data/dalvik-cache/system@app@STweaks_Googy-Max.apk@classes.dex");
+delete("/data/dalvik-cache/system@app@GTweaks.apk@classes.dex");
+delete("/data/dalvik-cache/system@app@HybridTweaks.apk@classes.dex");
+delete_recursive("/data/data/com.gokhanmoral.stweaks.app");
+delete_recursive("/data/data/com.gokhanmoral.stweaks_ghost.app");
+
+# Synapse app
+delete_recursive("/sdcard/Synapse");
+delete_recursive("/mnt/sdcard/Synapse");
+delete_recursive("/storage/sdcard0/Synapse");
+delete_recursive("/data/media/0/Synapse");
+delete_recursive("/data/.Synapse");
+delete_recursive("/data/data/com.af.synapse");
+delete_recursive("/system/app/Synapse.apk");
+delete_recursive("/data/app/Synapse.apk");
+delete_recursive("/data/app/com.af.synapse-1.apk");
+delete_recursive("/data/app/com.af.synapse-2.apk");
+delete_recursive("/data/app/com.af.synapse-3.apk");
+delete_recursive("/data/app/com.af.synapse-4.apk");
+delete_recursive("/data/app/com.af.synapse-5.apk");
+delete_recursive("/data/app-lib/com.af.synapse-1");
+delete_recursive("/data/app-lib/com.af.synapse-2");
+delete_recursive("/data/app-lib/com.af.synapse-3");
+delete_recursive("/data/app-lib/com.af.synapse-4");
+delete_recursive("/data/app-lib/com.af.synapse-5");
+delete("/data/dalvik-cache/system@app@Synapse.apk@classes.dex");
+delete("/data/dalvik-cache/data@app@Synapse.apk@classes.dex");
+delete("/data/dalvik-cache/data@app@com.af.synapse-1.apk@classes.dex");
+delete("/data/dalvik-cache/data@app@com.af.synapse-2.apk@classes.dex");
+delete("/data/dalvik-cache/data@app@com.af.synapse-3.apk@classes.dex");
+delete("/data/dalvik-cache/data@app@com.af.synapse-4.apk@classes.dex");
+delete("/data/dalvik-cache/data@app@com.af.synapse-5.apk@classes.dex");
+
+# KNOX
+delete_recursive("/system/app/KNOXAgent.apk");
+delete_recursive("/system/app/KNOXAgent.odex");
+delete_recursive("/system/app/KnoxAttestationAgent.apk");
+delete_recursive("/system/app/KnoxAttestationAgent.odex");
+delete_recursive("/system/app/KNOXStore.apk");
+delete_recursive("/system/app/KNOXStore.odex");
+delete_recursive("/system/app/KNOXStub.apk");
+delete_recursive("/system/app/KNOXStub.odex");
+delete_recursive("/system/app/ContainerAgent.apk");
+delete_recursive("/system/app/ContainerAgent.odex");
+delete_recursive("/system/app/ContainerEventsRelayManager.apk");
+delete_recursive("/system/app/ContainerEventsRelayManager.odex");
+delete_recursive("/system/priv-app/KLMSAgent.apk");
+delete_recursive("/system/priv-app/KLMSAgent.odex");
+run_program("/sbin/rm", "-rf", "/system/containers");
+delete_recursive("/system/lib/modules");
+run_program("/sbin/rm", "-rf", "/system/lib/modules");
+
+ui_print("Extracting System Files");
+ui_print("");
+package_extract_dir("system", "/system");
+set_perm_recursive(0, 0, 0755, 0644, "/system/lib/modules");
+ui_print("Extracting Kernel Files");
+ui_print("");
+package_extract_dir("mods", "/tmp");
+package_extract_file("boot.img", "/tmp/boot.img");
+set_perm(0, 0, 0777, "/tmp/flash_kernel.sh");
+set_perm(0, 0, 0777, "/tmp/check_fs.sh");
+set_perm(0, 0, 0777, "/tmp/mkbootimg.sh");
+set_perm(0, 0, 0777, "/tmp/mkbootimg");
+set_perm(0, 0, 0777, "/tmp/unpackbootimg");
+set_perm(0, 0, 0777, "/tmp/fstab.qcom");
+set_perm(0, 0, 0777, "/tmp/fstab_sys.qcom");
+set_perm(0, 0, 0777, "/tmp/init.target.rc");
+set_perm(0, 0, 0777, "/tmp/init.target.sys.rc");
+
+ui_print("Checking Filesystem");
+ui_print("");
+run_program("/tmp/check_fs.sh");
+ui_print("Flashing Kernel");
+run_program("/tmp/flash_kernel.sh");
+ui_print("Checking build.prop for patches");
+ui_print("");
+package_extract_dir("mods", "/tmp");
+set_perm(0, 0, 0755, "/tmp/patch");
+run_program("/tmp/patch");
+delete("/tmp/patch");
+ui_print("Unmounting System");
+ui_print("");
+unmount("/system");
+ui_print("It is recommended to Wipe cache & Davlik Cache now!");
+ui_print("");
+ui_print("************************************");
+ui_print("Kernel Installation was successfull!");
+ui_print("************************************");
+show_progress(0.100000, 0);
