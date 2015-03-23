@@ -50,12 +50,9 @@ if grep -q "ro.securestorage.support=true" $BP; then
 	sed -i "s/"ro.securestorage.support=true"/"ro.securestorage.support=false"/g" $BP
 fi;
 
-setprop pm.sleep_mode 1;
-setprop ro.ril.disable.power.collapse 0;
-setprop ro.telephony.call_ring.delay 1000;
 }
 
-#Set some build props mods
+#Apply Script
 mount
 backup
 mod

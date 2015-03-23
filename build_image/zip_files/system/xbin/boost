@@ -1,0 +1,54 @@
+#!/system/bin/sh
+# HackerRomTeam 2015  
+# Light ROM Lollipop™ 
+# Copyright (C) 2015 Hybridmax
+#=======================================================================#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.
+#  You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#=======================================================================#
+
+busybox mount -o remount,rw /
+busybox mount -o remount,rw rootfs
+busybox mount -o remount,rw /system
+
+busybox clear
+busybox echo
+busybox sleep 3
+busybox echo ">>>...StartUp Process Boost..."
+busybox echo ""
+free | awk '/Mem/{print ">>>...Memory Before Booster : "$4/1024" MB";}'
+busybox echo ""
+busybox echo ">>>-----------------------<<<"
+busybox echo ""
+busybox echo -n ">>>...In Progress..."
+busybox sync;
+busybox sleep 1
+busybox echo -n ".";
+busybox echo "3" > /proc/sys/vm/drop_caches;
+busybox sleep 1
+busybox echo -n ".";
+dc=/proc/sys/vm/drop_caches
+dc_v=`cat $dc`
+if [ "$dc_v" -gt 1 ]; then
+busybox echo "1" > /proc/sys/vm/drop_caches;
+else
+busybox echo ""
+busybox echo ">>>...Error When Boosting..?"
+busybox exit
+fi
+busybox sleep 1
+busybox echo -n ".";
+busybox echo ""
+busybox echo ""
+busybox echo ">>>-----------------------<<<"
+busybox sleep 3
+busybox echo ""
+busybox echo ">>>...System Optimized!!... "
+busybox echo ""
+free | awk '/Mem/{print ">>>...Memory After Booster : "$4/1024" MB";}'
