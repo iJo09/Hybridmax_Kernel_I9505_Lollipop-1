@@ -9,10 +9,6 @@
 #include <linux/mod_devicetable.h>
 #include <linux/gfp.h>
 
-static unsigned virtqueue_enable_cb_prepare(struct virtqueue *vq);
-
-bool virtqueue_poll(struct virtqueue *vq, unsigned);
-
 /**
  * virtqueue - a queue to register buffers for sending or receiving.
  * @list: the chain of virtqueues for this device
