@@ -4098,7 +4098,7 @@ done:
 }
 
 
-static inline int l2cap_command_rej(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd, u8 *data)
+static inline int l2cap_command_rej(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd, u16 cmd_len, u8 *data)
 {
 	struct l2cap_cmd_rej *rej = (struct l2cap_cmd_rej *) data;
 
@@ -4129,14 +4129,8 @@ static struct sock *l2cap_create_connect(struct l2cap_conn *conn,
 	struct sock *parent, *sk = NULL;
 	int result, status = L2CAP_CS_NO_INFO;
 
-	u16 dcid = 0, scid;
-	__le16 psm;
-
-	if (cmd_len < sizeof(struct l2cap_conn_req))
-		return -EPROTO;
-
-	scid = __le16_to_cpu(req->scid);
-	psm = req->psm;
+	u16 dcid = 0, scid = __le16_to_cpu(req->scid);
+	__le16 psm = req->psm;
 
 	BT_DBG("psm 0x%2.2x scid 0x%4.4x", psm, scid);
 
@@ -4268,7 +4262,8 @@ sendresp:
 }
 
 static inline int l2cap_connect_req(struct l2cap_conn *conn,
-					struct l2cap_cmd_hdr *cmd, u8 *data)
+					struct l2cap_cmd_hdr *cmd, u16 cmd_len,
+					u8 *data)
 {
 	l2cap_create_connect(conn, cmd, data, L2CAP_CONN_RSP, 0);
 	return 0;
@@ -4483,7 +4478,7 @@ unlock:
 	return 0;
 }
 
-static inline int l2cap_config_rsp(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd, u8 *data)
+static inline int l2cap_config_rsp(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd, u16 cmd_len, u8 *data)
 {
 	struct l2cap_conf_rsp *rsp = (struct l2cap_conf_rsp *)data;
 	u16 scid, flags, result;
@@ -4667,7 +4662,7 @@ static inline int l2cap_disconnect_req(struct l2cap_conn *conn,
 	return 0;
 }
 
-static inline int l2cap_disconnect_rsp(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd, u8 *data)
+static inline int l2cap_disconnect_rsp(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd, u16 cmd_len, u8 *data)
 {
 	struct l2cap_disconn_rsp *rsp = (struct l2cap_disconn_rsp *) data;
 	u16 dcid, scid;
@@ -4920,11 +4915,11 @@ static inline int l2cap_create_channel_req(struct l2cap_conn *conn,
 }
 
 static inline int l2cap_create_channel_rsp(struct l2cap_conn *conn,
-					struct l2cap_cmd_hdr *cmd, u8 *data)
+					struct l2cap_cmd_hdr *cmd, u16 cmd_len, u8 *data)
 {
 	BT_DBG("conn %p", conn);
 
-	return l2cap_connect_rsp(conn, cmd, data);
+	return l2cap_connect_rsp(conn, cmd, cmd_len, data);
 }
 
 static inline int l2cap_move_channel_req(struct l2cap_conn *conn,

@@ -2777,6 +2777,7 @@ static unsigned long balance_pgdat(pg_data_t *pgdat, int order,
 {
 	struct zone *unbalanced_zone;
 	unsigned long balanced;
+	bool all_zones_ok = true;
 	int priority;
 	int i;
 	int end_zone = 0;	/* Inclusive.  0 = ZONE_DMA */
