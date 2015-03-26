@@ -1,7 +1,10 @@
 #!/bin/bash
 # kernel build script by Hybridmax
 
-KERNEL_DIR=/home/hybridmax/android/kernel/s4/s4tw
+BUILD_USER="$USER"
+DATE="`date +"%d-%m-%Y"`"
+TIME="`date +"%T"`"
+KERNEL_DIR="$PWD"
 BUILD_USER="$USER"
 TOOLCHAIN_DIR=/home/hybridmax/android/toolchains
 

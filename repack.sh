@@ -1,7 +1,10 @@
 #!/bin/bash
 
-KERNEL_NAME=Hybridmax_Kernel_TWLP
-KERNEL_DIR=/home/hybridmax/android/kernel/s4/s4tw
+BUILD_USER="$USER"
+DATE="`date +"%d-%m-%Y"`"
+TIME="`date +"%T"`"
+KERNEL_NAME=Hybridmax_Kernel_TWLP_v4_I9505_$DATE
+KERNEL_DIR="$PWD"
 REPACK_DIR=build_image/tw-5.0
 BUILD=build_image
 ZIP_FILES=zip_files
@@ -30,7 +33,7 @@ REPACK_KERNEL()
 	mv -f boot.img $KERNEL_DIR/$BUILD/$ZIP_FILES
 	echo "Making zip"
 	cd ../$ZIP_FILES
-	zip -r $KERNEL_NAME.zip META-INF mods system data boot.img
+	zip -r $KERNEL_NAME.zip META-INF kernel hybridmax system data boot.img
         mv $KERNEL_NAME.zip $OUTPUT_DIR
         cd ..
         echo "Making Cleaning..."
