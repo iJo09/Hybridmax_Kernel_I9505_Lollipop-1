@@ -407,8 +407,8 @@ config SAMSUNG_JACK_GNDLDET
 	depends on INPUT
 	default n
 	help
-	  This is gnd plus l detection for earjack.
-	  The gnd gpio is added for the detection of earjack.
+	  This is GND plus L detection for earjack.
+	  The GND GPIO is added for the detection of earjack.
 	  This is added to decide the earjack properly
 	  in case of the insertion of water.
 	  
@@ -432,7 +432,7 @@ config 2MIC_ES305
 	depends on I2C
 	default n
 	---help---
-	   This option enables voice processing audience chip.Please enable this chip
+	   This option enables voice processing audience chip. Please enable this chip
 	   if you want to enable voice processing during call.
 
 	   To compile this driver as a module, choose M here: the
@@ -641,11 +641,11 @@ config TSIF_CHRDEV
 	  module will be called tsif_chrdev.
 
 config TSIF_DEBUG
-	bool "Turn on debugging information for tsif driver"
+	bool "Turn on debugging information for TSIF driver"
 	depends on TSIF
 	default n
 	---help---
-	  This turns on debugging information for the tsif driver
+	  This turns on debugging information for the TSIF driver
 
 config TSPP
 	depends on ARCH_MSM
@@ -752,7 +752,6 @@ config USB_HSIC_SMSC_HUB
 	help
 	  Enables support for the HSIC (High Speed Inter-Chip) based
 	  SMSC3503 hub controller present on the Qualcomm chipsets.
-
 	  This adds support for connecting devices like mouse in HSIC
 	  Host mode.
 
@@ -787,18 +786,17 @@ config VP_A2220
 	  This option enables voice processing audience chip.Please enable this chip
 	  if you want to enable voice processing during call.
 
-
 config SEC_TORCH_FLASH
-	bool "torch flash driver"
+	bool "Torch flash driver"
 	default n
 	help
 	  This driver provides torch flash function.	  
 
 config CHG_INCOMPATIBLE
-        tristate "support incompatible charger"
+        tristate "Incompatible charger support"
         default n
         help
-          this option enable support for incompatible charger
+          This option enable support for incompatible charger
 
 config NFC_PN544
         bool "NXP PN544 NFC Controller Driver"
