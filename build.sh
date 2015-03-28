@@ -17,11 +17,11 @@ TOOLCHAIN_DIR=/home/hybridmax/android/toolchains
 
 #Linaro
 #BUILD_CROSS_COMPILE=$TOOLCHAIN_DIR/linaro_4.7.4_arm-cortex-a15/bin/arm-cortex_a15-linux-gnueabihf-
-#BUILD_CROSS_COMPILE=$TOOLCHAIN_DIR/linaro_4.9_arm-cortex-a15/bin/arm-cortex_a15-linux-gnueabihf-
+BUILD_CROSS_COMPILE=$TOOLCHAIN_DIR/linaro_4.9_arm-cortex-a15/bin/arm-cortex_a15-linux-gnueabihf-
 #BUILD_CROSS_COMPILE=$TOOLCHAIN_DIR/linaro_4.9_arm-cortex-linux/bin/arm-cortex-linux-gnueabi-
 
 #HRT Linaro
-BUILD_CROSS_COMPILE=$TOOLCHAIN_DIR/hrt-arm-eabi-4.9/bin/arm-eabi-
+#BUILD_CROSS_COMPILE=$TOOLCHAIN_DIR/hrt-arm-eabi-4.9/bin/arm-eabi-
 
 #Stock
 #BUILD_CROSS_COMPILE=$TOOLCHAIN_DIR/arm-eabi_4.7/bin/arm-eabi-
@@ -71,7 +71,7 @@ BUILD_KERNEL()
         export SUBARCH=arm
         export USE_SEC_FIPS_MODE=true
         export KCONFIG_NOTIMESTAMP=true
-        export ENABLE_GRAPHITE=true 
+#       export ENABLE_GRAPHITE=true 
         export CROSS_COMPILE=$BUILD_CROSS_COMPILE
         make $USER_DEFCONFIG VARIANT_DEFCONFIG=$VARIANT_DEFCONFIG SELINUX_DEFCONFIG=$SELINUX_DEFCONFIG
         make -j$BUILD_JOB_NUMBER
